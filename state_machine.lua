@@ -33,28 +33,21 @@ function StateMachine:is(state)
     return self.currentState == state
 end
 
-function StateMachine:enter(state)
-    return self.currentState == state and self.entered
+function StateMachine:enter()
+    return self.entered
 end
 
-function StateMachine:exit(state)
-    return self.previousState == state and self.entered
+
+function StateMachine:from(state)
+    return self.previousState == state
 end
 
-function StateMachine:changed(from, to)
-    return self.previousState == from and self.currentState == to and self.entered
+function StateMachine:before(duration)
+    return self.duration < duration
 end
 
-function StateMachine:before(state, duration)
-    return self.currentState == state and self.duration < duration
-end
-
-function StateMachine:after(state, duration)
-    return self.currentState == state and self.duration > duration
-end
-
-function StateMachine:changedBefore(from, to, duration)
-    return self.previousState == from and self.currentState == to and self.duration < duration
+function StateMachine:after(duration)
+    return self.duration > duration
 end
 
 return StateMachine

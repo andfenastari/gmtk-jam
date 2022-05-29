@@ -8,7 +8,7 @@ local ground = {}
 
 local start
 
-function debugDrawBody(body)
+function DebugDrawBody(body)
     for _, fixture in ipairs(body:getFixtures()) do
         local shape = fixture:getShape()
         if shape:getType() == "circle" then
@@ -30,11 +30,11 @@ local function onWorldCallback(name)
         local d2 = b2:getUserData()
 
         if type(d1) == "table" and d1[name] then
-            d1[name](d1, f1, f2, unpack(arg))
+            d1[name](d1, f1, f2, ...)
         end
 
         if type(d2) == "table" and d2[name] then
-            d2[name](d2, f2, f1, unpack(arg))
+            d2[name](d2, f2, f1, ...)
         end
     end
 end
@@ -77,7 +77,7 @@ end
 
 function love.draw()
 
-    love.graphics.clear(0.1, 0.2, 0.92)
+    love.graphics.clear(0.247, 0.494, 0.878)
 
     camera:push()
         love.graphics.print("Hello, LuVE!", 10, 10)
@@ -87,7 +87,7 @@ function love.draw()
         level1:drawLayer(level1.layers.Terrain)
 
         for _, g in ipairs(ground) do
-            debugDrawBody(g)
+            DebugDrawBody(g)
         end
     camera:pop()
 end

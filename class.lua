@@ -3,6 +3,7 @@ local M = {}
 function M:__call(...)
     local instance = {}
     setmetatable(instance, self)
+    instance.class = self
     instance:init(...)
 
     return instance
